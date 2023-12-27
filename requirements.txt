@@ -1,0 +1,2 @@
+1- pip install fpdf
+2- pip install unittest
