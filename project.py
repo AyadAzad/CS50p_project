@@ -15,6 +15,7 @@ class PasswordGenerator:
     def add_platform(self):
         platform = input("Enter your platform :")
         return platform.capitalize()
+
     def generate_random_password(self, length=12):
         characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:'<>,.?/"
         password = ''.join(random.choice(characters) for _ in range(length))
@@ -27,7 +28,8 @@ class PasswordGenerator:
         while len(clean_text) < 8:
             clean_text += clean_text
 
-        random_chars = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k= len(clean_text)))
+        random_chars = ''.join(
+            random.choices(string.ascii_letters + string.digits + string.punctuation, k=len(clean_text)))
 
         password = ''.join(random.sample(clean_text + random_chars, len(clean_text + random_chars)))
         return password
@@ -54,11 +56,11 @@ class PasswordGenerator:
         pdf.image(r"E:\CS50_project\blue_key.jpg", x=12, y=172, w=12, h=12)
 
         if platform.lower() == 'facebook':
-            pdf.image(r"E:\CS50_project\facebook_logo.png", x=12, y=172+17, w=12, h=12)
+            pdf.image(r"E:\CS50_project\facebook_logo.png", x=12, y=172 + 17, w=12, h=12)
         elif platform.lower() == 'linkedin':
-            pdf.image(r"E:\CS50_project\linkedin_logo.png", x=12, y=172+17, w=12, h=12)
+            pdf.image(r"E:\CS50_project\linkedin_logo.png", x=12, y=172 + 17, w=12, h=12)
         elif platform.lower() == 'instagram':
-            pdf.image(r"E:\CS50_project\instagram_logo.jpg", x=12, y=172+17, w=12, h=12)
+            pdf.image(r"E:\CS50_project\instagram_logo.jpg", x=12, y=172 + 17, w=12, h=12)
 
         pdf.set_font("Arial", size=28)
 
@@ -72,32 +74,45 @@ class PasswordGenerator:
 
 
 def main():
-    generator = PasswordGenerator()
-    user_input = int(input("choose an option \n"
-                           "1- Generate random password \n"
-                           "2- Generate custom passwrod \n"
-                           "3- Check password strength \n"
-                           "\n"
-                           "Options :"))
+    try:
+        generator = PasswordGenerator()
+        while True:
+            user_input = input("choose an option \n"
+                               "1- Generate random password \n"
+                               "2- Generate custom password \n"
+                               "3- Check password strength \n"
+                               "\n"
+                               "Options :")
+            try:
+                user_input = int(user_input)
+                if user_input not in [1, 2, 3]:
+                    print(f"please enter a value between 1 to 3")
+                    continue
+            except ValueError:
+                print("Enter an Integer.")
+                continue
 
-    if user_input == 1:
-        random_password = generator.generate_random_password()
-        name = generator.add_name()
-        platform = generator.add_platform()
-        generator.generate_password_card(name, random_password, platform, 'random_password_card.pdf')
-        print("Random password generated successfully !")
+            if user_input == 1:
+                random_password = generator.generate_random_password()
+                name = generator.add_name()
+                platform = generator.add_platform()
+                generator.generate_password_card(name, random_password, platform, 'random_password_card.pdf')
+                print("Random password generated successfully !")
 
-    elif user_input == 2:
-        user_input = input("Enter text for custom password: ")
-        name = generator.add_name()
-        platform = generator.add_platform()
-        custom_password = generator.generate_custom_password(user_input)
-        generator.generate_password_card(name, custom_password, platform, 'custom_password_card.pdf')
-        print("Custom password generated successfully !")
-    elif user_input == 3:
-        user_password = input("Enter password to check its strength: ")
-        strength = generator.rate_password_strength(user_password)
-        print(f"Password Strength: {strength}/10")
+            elif user_input == 2:
+                user_input = input("Enter text for custom password: ")
+                name = generator.add_name()
+                platform = generator.add_platform()
+                custom_password = generator.generate_custom_password(user_input)
+                generator.generate_password_card(name, custom_password, platform, 'custom_password_card.pdf')
+                print("Custom password generated successfully !")
+            elif user_input == 3:
+                user_password = input("Enter password to check its strength: ")
+                strength = generator.rate_password_strength(user_password)
+                print(f"Password Strength: {strength}/10")
+
+    except Exception as e:
+        print(f"error occurred {e}")
 
 
 if __name__ == "__main__":
