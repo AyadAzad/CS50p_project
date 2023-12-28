@@ -2,7 +2,7 @@
 
 ## Video Demo
 
-[![Watch the video](https://img.youtube.com/vi/YOUR_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE)
+[![Watch the video](C:\Users\Anton\PycharmProjects\CS50p_project\thumbnail.png)](https://youtu.be/hYyb3MAQH2k)
 
 ## Description
 

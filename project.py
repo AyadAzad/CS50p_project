@@ -52,15 +52,15 @@ class PasswordGenerator:
         pdf = FPDF("P", "mm", "A4")  # Specify page format and units
         pdf.add_page()
 
-        pdf.image(r"E:\CS50_project\background.png", x=0, y=0, w=pdf.w, h=pdf.h)
-        pdf.image(r"E:\CS50_project\blue_key.jpg", x=12, y=172, w=12, h=12)
+        pdf.image(r"C:\Users\Anton\PycharmProjects\CS50p_project\background.png", x=0, y=0, w=pdf.w, h=pdf.h)
+        pdf.image(r"C:\Users\Anton\PycharmProjects\CS50p_project\blue_key.jpg", x=12, y=172, w=12, h=12)
 
         if platform.lower() == 'facebook':
-            pdf.image(r"E:\CS50_project\facebook_logo.png", x=12, y=172 + 17, w=12, h=12)
+            pdf.image(r"C:\Users\Anton\PycharmProjects\CS50p_project\facebook_logo.png", x=12, y=172 + 17, w=12, h=12)
         elif platform.lower() == 'linkedin':
-            pdf.image(r"E:\CS50_project\linkedin_logo.png", x=12, y=172 + 17, w=12, h=12)
+            pdf.image(r"C:\Users\Anton\PycharmProjects\CS50p_project\linkedin_logo.png", x=12, y=172 + 17, w=12, h=12)
         elif platform.lower() == 'instagram':
-            pdf.image(r"E:\CS50_project\instagram_logo.jpg", x=12, y=172 + 17, w=12, h=12)
+            pdf.image(r"C:\Users\Anton\PycharmProjects\CS50p_project\instagram_logo.jpg", x=12, y=172 + 17, w=12, h=12)
 
         pdf.set_font("Arial", size=28)
 
@@ -98,7 +98,7 @@ def main():
                 platform = generator.add_platform()
                 generator.generate_password_card(name, random_password, platform, 'random_password_card.pdf')
                 print("Random password generated successfully !")
-
+                break
             elif user_input == 2:
                 user_input = input("Enter text for custom password: ")
                 name = generator.add_name()
@@ -106,11 +106,12 @@ def main():
                 custom_password = generator.generate_custom_password(user_input)
                 generator.generate_password_card(name, custom_password, platform, 'custom_password_card.pdf')
                 print("Custom password generated successfully !")
+                break
             elif user_input == 3:
                 user_password = input("Enter password to check its strength: ")
                 strength = generator.rate_password_strength(user_password)
                 print(f"Password Strength: {strength}/10")
-
+                break
     except Exception as e:
         print(f"error occurred {e}")
 
